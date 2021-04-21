@@ -1,9 +1,9 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useReducer } from 'react';
 
 export const MovieContext = createContext();
 
-export const MovieProvider = (props) => {
-    const [movies, setMovies] = useState([
+const initialState = {
+    movies: [
         {
             name: 'Harry Poter',
             price: '$10',
@@ -19,10 +19,28 @@ export const MovieProvider = (props) => {
             price: '$10',
             id: 23524
         }
-    ]);
+    ]
+}
+
+const movieReducer = (state, action) => {
+    switch (action.type) {
+        case 'ADD_MOVIE':
+            return {
+                ...state,
+                movies: [
+                    ...state.movies, action.payload
+                ]
+            }
+        default:
+            return state;
+    }
+}
+
+export const MovieProvider = (props) => {
+    const [state, dispatch] = useReducer(movieReducer, initialState);
 
     return(
-        <MovieContext.Provider value={[movies, setMovies]}>
+        <MovieContext.Provider value={{state, dispatch}}>
             {props.children}
         </MovieContext.Provider>
     );

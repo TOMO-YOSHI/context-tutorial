@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 import { MovieContext } from './MovieContext';
 
 const Nav = () => {
-    const [ movies, setMovies ] = useContext(MovieContext);
-    
+    // const [ movies, setMovies ] = useContext(MovieContext);
+    const { state: {movies} } = useContext(MovieContext);
+
     return (
         <div>
             <h3>Dev Tomo</h3>

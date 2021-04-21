@@ -9,7 +9,8 @@ const AddMovie = () => {
         name: '',
         price: ''
     })
-    const [movies, setMovies] = useContext(MovieContext);
+    // const [movies, setMovies] = useContext(MovieContext);
+    const { state: { movies }, dispatch } = useContext(MovieContext);
 
     const onChangeHandler = (e) => {
         setInput(prev => ({
@@ -21,13 +22,17 @@ const AddMovie = () => {
     const addMovie = e => {
         e.preventDefault();
         const id = uuidv4();
-        setMovies(prev => ([
-            ...prev,
-            {
-                ...input,
-                id
-            }
-        ]))
+        // setMovies(prev => ([
+        //     ...prev,
+        //     {
+        //         ...input,
+        //         id
+        //     }
+        // ]))
+        dispatch({
+            type: 'ADD_MOVIE',
+            payload: {...input, id}
+        })
     }
 
     return (
