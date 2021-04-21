@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { MovieContext } from './MovieContext';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 const AddMovie = () => {
     // const [name, setName] = useState('');
@@ -10,7 +10,7 @@ const AddMovie = () => {
         price: ''
     })
     // const [movies, setMovies] = useContext(MovieContext);
-    const { state: { movies }, dispatch } = useContext(MovieContext);
+    const { state: { movies }, dispatch, addMovie } = useContext(MovieContext);
 
     const onChangeHandler = (e) => {
         setInput(prev => ({
@@ -19,24 +19,18 @@ const AddMovie = () => {
         }))
     }
 
-    const addMovie = e => {
+    const addMovieHandler = e => {
         e.preventDefault();
-        const id = uuidv4();
-        // setMovies(prev => ([
-        //     ...prev,
-        //     {
-        //         ...input,
-        //         id
-        //     }
-        // ]))
-        dispatch({
-            type: 'ADD_MOVIE',
-            payload: {...input, id}
-        })
+        // const id = uuidv4();
+        // dispatch({
+        //     type: 'ADD_MOVIE',
+        //     payload: {...input, id}
+        // })
+        addMovie({ ...input})
     }
 
     return (
-        <form onSubmit={addMovie}>
+        <form onSubmit={addMovieHandler}>
             <input type='text' name='name' onChange={onChangeHandler} value={input.name} />
             <input type='text' name='price' onChange={onChangeHandler} value={input.price} />
             <button>Submit</button>
