@@ -21,19 +21,14 @@ const MovieList = () => {
     }
 
     if (loading) {
-        return <div>No Data</div>
+        return <div>Loading...</div>
     }
 
     return (
         <div>
-            {
-                movies ?
-                movies.map(movie => (
-                    <Movie key={movie.id} name={movie.name} price={movie.price} id={movie.id} />
-                ))
-                :
-                <p>No Data</p>
-            }
+            {movies.map(movie => (
+                <Movie key={movie.id} name={movie.name} price={movie.price} id={movie.id} />
+            ))}
         </div>
     );
 };
