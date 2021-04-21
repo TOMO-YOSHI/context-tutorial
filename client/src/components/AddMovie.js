@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { MovieContext } from './MovieContext';
+import { MovieContext } from '../context/MovieContext';
 // import { v4 as uuidv4 } from 'uuid';
 
 const AddMovie = () => {
@@ -21,18 +21,13 @@ const AddMovie = () => {
 
     const addMovieHandler = e => {
         e.preventDefault();
-        // const id = uuidv4();
-        // dispatch({
-        //     type: 'ADD_MOVIE',
-        //     payload: {...input, id}
-        // })
         addMovie({ ...input})
     }
 
     return (
         <form onSubmit={addMovieHandler}>
-            <input type='text' name='name' onChange={onChangeHandler} value={input.name} />
-            <input type='text' name='price' onChange={onChangeHandler} value={input.price} />
+            <input type='text' name='name' onChange={onChangeHandler} value={input.name} placeholder="Enter movie name" />
+            <input type='text' name='price' onChange={onChangeHandler} value={input.price} placeholder="Enter place" />
             <button>Submit</button>
         </form>
     );

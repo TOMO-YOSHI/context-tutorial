@@ -61,7 +61,7 @@ app.post('/api/movies', (req, res) => {
             `)
             .then(result => {
                 res.send({
-                    id: result.insertedId
+                    id: result.insertId
                 })
             })
             .catch(error=>{

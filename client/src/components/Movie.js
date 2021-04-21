@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { MovieContext } from './MovieContext';
+import { MovieContext } from '../context/MovieContext';
 
 const Movie = ({name, price, id}) => {
     const { dispatch, deleteMovie } = useContext(MovieContext);
@@ -16,7 +16,9 @@ const Movie = ({name, price, id}) => {
     return (
         <div>
             <h3>{name} <span id={id} style={{color: 'red', cursor: 'pointer'}} onClick={deleteMovieHandler}>x</span></h3>
-            <p>{price}</p>
+            {
+                price ? <p>${price}</p> : <p>No price data</p>
+            }
         </div>
     );
 };

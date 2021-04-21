@@ -64,7 +64,7 @@ export const MovieProvider = (props) => {
     }
 
     const addMovie = async ({ name, price }) => {
-        const addedMoviesId = await fetch('http://localhost:8888/api/movies', {
+        const {id} = await fetch('http://localhost:8888/api/movies', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -75,9 +75,11 @@ export const MovieProvider = (props) => {
         .then(response => response)
         .catch(error => console.log(error))
 
+        // console.log(id)
+
         dispatch({
             type: 'ADD_MOVIE',
-            payload: { name, price, id: addedMoviesId }
+            payload: { name, price, id }
         })
     }
 
@@ -99,8 +101,10 @@ export const MovieProvider = (props) => {
         })
     }
 
+    const value = {state, dispatch, getMovies, addMovie, deleteMovie}
+
     return(
-        <MovieContext.Provider value={{state, dispatch, getMovies, addMovie, deleteMovie}}>
+        <MovieContext.Provider value={value}>
             {props.children}
         </MovieContext.Provider>
     );
